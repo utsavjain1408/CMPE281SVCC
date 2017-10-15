@@ -1,18 +1,42 @@
-	package main
+package main
 
-	import (
-		"net/http"
-		"io"
-	)
 
-	func main() {
+import (
+
+	"net/http"
+
+	"io"
+
+)
+
+
+func main() {
+
 	http.HandleFunc("/", foo)
+
 	http.ListenAndServe(":8080", nil)
+
 
 	}
 
 
+	const AddForm = `
 
-	func foo(w http.ResponseWriter, req *http.Request) {
-		io.WriteString(w, "Hello World")
+	<form method="GET" action="/add">
+
+	<ul><li><b>First</b></li><li>Second</li><li>Third</li></ul>
+	
+</form>
+
+	`
+	
+
+	
+	func foo(w http.ResponseWriter, req *http.Request){
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	io.WriteString(w, AddForm)
+
+
 	}
